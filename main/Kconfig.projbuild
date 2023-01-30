@@ -1,0 +1,142 @@
+# ===================WIFI SETING=======================
+menu  "WiFi Seting"
+
+    choice WIFI_CONNECT
+		bool "Select the Wifi connection method"
+		default WIFI_CONNECT_APSTA
+		help
+			Select Wifi connection.
+		config WIFI_CONNECT_AP
+			bool "Connect to Wifi using AP mode."
+		config WIFI_CONNECT_STA
+			bool "Connect to Wifi using STA mode."
+		config WIFI_CONNECT_APSTA
+			bool "Connect to Wifi using APSTA mode"
+	endchoice
+
+    #************** AP SECTION ****************
+    comment "for WiFi AP Setting"
+		depends on WIFI_CONNECT_AP || WIFI_CONNECT_APSTA
+
+	config AP_WIFI_SSID
+		depends on WIFI_CONNECT_AP || WIFI_CONNECT_APSTA
+		string "WiFi SSID of AP mode"
+		default "ap-ssid"
+		help
+			SSID (network name) for the example to connect to.
+
+	config AP_WIFI_PASSWORD
+		depends on WIFI_CONNECT_AP || WIFI_CONNECT_APSTA
+		string "WiFi Password of AP mode"
+		default "ap-password"
+		help
+			WiFi password (WPA or WPA2) for the example to use.
+
+	config AP_WIFI_CHANNEL
+		depends on WIFI_CONNECT_AP || WIFI_CONNECT_APSTA
+		int "WiFi Channel of AP mode"
+		range 1 13
+		default 1
+		help
+			WiFi channel (network channel) for the example to use.
+
+	config AP_MAX_STA_CONN
+		depends on WIFI_CONNECT_AP || WIFI_CONNECT_APSTA
+		int "Maximal STA connections of AP mode"
+		default 4
+		help
+			Max number of the STA connects to AP.
+    #********************************************
+    #************** STA SECTION *****************
+    comment "for WiFi STA Setting"
+		depends on WIFI_CONNECT_STA || WIFI_CONNECT_APSTA
+
+
+    config STA_WIFI_SSID
+        depends on WIFI_CONNECT_STA || WIFI_CONNECT_APSTA
+        string "WiFi STA SSID"
+        default "MY_SSID"
+        help
+        SSID (network name) for the example to connect to.
+    
+    config STA_WIFI_PASSWORD
+        depends on WIFI_CONNECT_STA || WIFI_CONNECT_APSTA
+        string "WiFi STA Password"
+        default "mypassword"
+        help
+        WiFi password (WPA or WPA2) for the example to use.
+
+    config ESP_MAXIMUM_RETRY
+        int "Maximum retry"
+        default 5
+        help
+            Set the Maximum retry to avoid station reconnecting to the AP unlimited when the AP is really inexistent.
+
+    choice WIFI_SCAN_METHOD
+        prompt "WiFi Scan Method"
+        default WIFI_SCAN_METHOD_ALL_CHANNEL
+        help
+            WiFi scan method:
+     
+            If "Fast" is selected, scan will end after find SSID match AP.
+     
+            If "All Channel" is selected, scan will end after scan all the channel.
+     
+        config WIFI_SCAN_METHOD_FAST
+            bool "Fast"
+        config WIFI_SCAN_METHOD_ALL_CHANNEL
+            bool "All Channel"
+    endchoice
+     
+    choice WIFI_CONNECT_AP_SORT_METHOD
+        prompt "WiFi Connect AP Sort Method"
+        default WIFI_CONNECT_AP_BY_SIGNAL
+        help
+            WiFi connect AP sort method:
+     
+            If "Signal" is selected, Sort matched APs in scan list by RSSI.
+     
+            If "Security" is selected, Sort matched APs in scan list by security mode.
+     
+        config WIFI_CONNECT_AP_BY_SIGNAL
+            bool "Signal"
+        config WIFI_CONNECT_AP_BY_SECURITY
+            bool "Security"
+    endchoice
+     
+    config WIFI_SCAN_RSSI_THRESHOLD
+        int "WiFi minimum rssi"
+        range -127 0
+     
+        default -127
+        help
+            The minimum rssi to accept in the scan mode.
+     
+    choice WIFI_SCAN_AUTH_MODE_THRESHOLD
+        prompt "WiFi Scan auth mode threshold"
+        default WIFI_AUTH_OPEN
+        help
+            The weakest authmode to accept in the scan mode.
+     
+        config WIFI_AUTH_OPEN
+            bool "OPEN"
+        config WIFI_AUTH_WEP
+            bool "WEP"
+        config WIFI_AUTH_WPA_PSK
+            bool "WPA PSK"
+        config WIFI_AUTH_WPA2_PSK
+            bool "WPA2 PSK"
+        config WIFI_AUTH_WPA_WPA2_PSK
+            bool "WPA WPA2 PSK"
+        config WIFI_AUTH_WPA2_ENTERPRISE
+            bool "WPA2 ENTERPRISE"
+        config WIFI_AUTH_WPA3_PSK
+            bool "WPA3 PSK"
+        config WIFI_AUTH_WPA2_WPA3_PSK
+            bool "WPA2 WPA3 PSK"
+        config WIFI_AUTH_WAPI_PSK
+            bool "WAPI PSK"
+    endchoice
+                                    
+endmenu
+#==========================================

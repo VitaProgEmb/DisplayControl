@@ -1,0 +1,19 @@
+idf_component_register(SRCS 
+"main.c"
+"../system/sys.c"
+"../uart/uart.c"
+"../player/play.c"
+"../wifi/wifi_ap_sta.c"
+"../http/http.c"
+"../sys_config_storage/sys_storage.c"
+"../spiflash/spiflash.c"
+INCLUDE_DIRS
+"../system"
+"../uart"
+"../player"
+"../wifi"
+"../http"
+"../sys_config_storage"
+"../spiflash"
+ ".")
+#  spiffs_create_partition_image(storage ../testWeb FLASH_IN_PROJECT)

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+<meta charset=UTF-8>
+<meta http-equiv=X-UA-Compatible content="IE=edge">
+<meta name=viewport content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<style>.butMenu{align-items:center;padding:0;height:30px;margin:4px 5px 4px 5px;width:30%;color:black;background-color:#ffb300}.butMenu:hover{background-color:grey;color:white;box-shadow:0 0 5px 0 #ffb300}h1{font:outline;color:#ffb300}.menuPanel{display:block;margin:0 auto;text-align:center;background-color:#3e3e3e}.comPanel{display:block;margin:0 auto;margin-top:10px;text-align:center;width:80%;background-color:#6e6e6e}.netPanel.comPanel{color:#ffb300}.filePanel.comPanel{background-color:#6e6e6e}body{font-family:Arial,"Helvetica Neue",Helvetica,sans-serif;margin:0;padding:0;background-color:black}.btn{display:block;margin:0 auto;height:25px;border-color:#ffb300}.btn:focus{box-shadow:0 0 10px 2px #ffb300}.prev{display:block;margin:0 auto;margin-top:30px;margin-bottom:30px;background-color:green}.modal{display:none;position:fixed;z-index:1;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:#000;background-color:rgba(0,0,0,0.8)}.modal-content{display:block;position:relative;text-align:center;color:#ffb300;background-color:rgba(37,37,37,0.6);margin:20% auto;padding:20px;border:3px inset #ffb300;width:50%;box-shadow:0 0 30px 0 rgba(255,205,130,0.5),0 6px 20px 0 rgba(255,255,255,0.19);animation-name:animatetop;animation-duration:.7s}@keyframes animatetop{from{top:-500px;opacity:0}to{top:0;opacity:.6}}.close{color:#f00;float:right;font-size:50px;font-weight:bold}.close:hover,.close:focus{color:#ffb300;text-decoration:none;cursor:pointer}.img{position:absolute;left:1px;top:10px;height:80px}.prog{display:block;margin:0 auto;width:70%;height:30px;border-radius:0}</style>
+</head>
+<body>
+<div class=menuPanel>
+<h1 id=menuTitle></h1>
+<hr>
+<button class=butMenu onclick=menu(1)>ДИСПЛЕЙ</button>
+<button class=butMenu onclick=menu(2)>ФАЙЛЫ</button>
+<button class=butMenu onclick=menu(3)>СЕТЬ</button>
+</div>
+<div id=myModal class=modal>
+<div class=modal-content>
+<h1>передача файла</h1>
+<img class=img src=load.gif alt="No ada">
+<progress value=30 max=100 class=prog> </progress>
+<br>
+<button id=close class=btn>Отмена</button>
+</div>
+</div>
+<div class=filePanel>
+<video class=prev width=200 height=200></video>
+<button class=btn>Выберите файл</button>
+<br>
+<button class=btn>Загрузить файл</button>
+<br>
+<button style="display:block;margin:0 auto" id=myBtn>Open Modal</button>
+</div>
+<div class=netPanel>
+<h2>точка доступа</h2>
+<form>
+Имя сети (SSID)
+<input class=btn type=text>
+<br>
+Пароль
+<input class=btn type=password>
+<br>
+Подтвердите пароль
+<input class=btn type=password>
+<br>
+показать пароль
+<input class=btn type=checkbox>
+</form>
+<br>
+<hr width=80%>
+<h2>Насройка станции</h2>
+<form action=addd>
+Имя станции (SSID)
+<input class=btn type=text>
+пароль станции
+<input class=btn type=password>
+показать пароль
+<input class=btn type=checkbox>
+</form>
+<button>сохраненнить и перезагрузить</button>
+</div>
+</body>
+<script>let menuTitle=document.getElementById("menuTitle");let panel1=document.getElementsByClassName("filePanel");let panel2=document.getElementsByClassName("netPanel");function set_none(){panel1[0].style.display="none";panel2[0].style.display="none"}function menu(b){console.log(b);switch(b){case 1:menuTitle.innerText="НАСТРОЙКИ ДИСПЛЕЯ";break;case 2:menuTitle.innerText="ФАЙЛЫ";set_none();panel1[0].style.display="block";break;case 3:menuTitle.innerText="НАСТРОЙКИ СЕТИ";set_none();panel2[0].style.display="block";break}}menu(1);var modal=document.getElementById("myModal");var btn=document.getElementById("myBtn");var span=document.getElementById("close");btn.onclick=function(){modal.style.display="block"};span.onclick=function(){modal.style.display="none"};</script>
+</html>

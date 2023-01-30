@@ -1,0 +1,1 @@
+mkspiffs -c files -b 4096 -p 256 -s 0xF0000 spiffs.bin & esptool --chip esp32 --port COM14 --baud 1500000 write_flash -z 0x110000 spiffs.bin

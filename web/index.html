@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <input type="file" id="lo" onchange="load()">
+  <button id="but">LOAD</button>
+  <video  style="display: none;" id="video"  width="300" height="300"></video>
+  <canvas id="can" width="300" height="300"></canvas>
+</body>
+  <script>
+   let lo = document.getElementById("lo")
+   let can = document.getElementById("can")
+   let ctx =  can.getContext('2d',{ willReadFrequently: true });
+   let but = document.getElementById("but")
+   let vid = document.getElementById("video")
+   let url = undefined
+   but.onclick =()=>{
+     lo.click() 
+    }
+    vid.onload=()=>{
+      console.log("video load")
+    }
+    vid.addEventListener('play', function () 
+    {
+        console.log("play")
+        let size = can.width * can.height * 3
+        console.log("size=",size)
+        let outBuff = new Uint8Array(size)
+        vid.pause()
+        vid.seeking=true
+        vid.playbackRate = 16
+        console.log("duration :",vid.duration / (1 / 24))
+        console.log("uint8t arr size:",outBuff.length)
+  
+        function loop() {
+        if (!vid.paused && !vid.ended) 
+        {
+            ctx.drawImage(vid, 0, 0,300,300);
+            seek++
+            setTimeout(loop, 33); // drawing at 30fps
+            let data = ctx.getImageData(0, 0, 300, 300)
+            // console.log(data.data.length)
+            let cnt =0
+            for(let i =0;i<data.data.length;i+=4)
+            {
+                outBuff[cnt] = data.data[i]
+                cnt++ 
+                outBuff[cnt] = data.data[i+1] 
+                cnt++
+                outBuff[cnt] = data.data[i+2] 
+                cnt ++
+            }
+
+            // console.log(outBuff)
+        }
+        }
+        loop()
+      }, 0);
+    
+    function load(){
+      console.log(lo.files[0])
+      url = URL.createObjectURL(lo.files[0])
+      console.log(url)
+      vid.src = url;
+      vid.autoplay = true
+    }
+    
+  </script>
+</html>

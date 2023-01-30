@@ -23,7 +23,7 @@ static const char *TAG = "main";
 void app_main(void)
 {
    sys_main_init();
-  
+   ESP_LOGW(TAG,"init end");
   //ESP_ERR_NVS_NOT_FOUND
   //  tmr =  xTimerCreate("timer",pdMS_TO_TICKS(60000),pdFALSE,NULL,cb);
   //  xTimerStart(tmr,0);

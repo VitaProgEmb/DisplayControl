@@ -7,6 +7,8 @@ idf_component_register(SRCS
 "../http/http.c"
 "../sys_config_storage/sys_storage.c"
 "../spiflash/spiflash.c"
+"../disp_drv/disp_drv.c"
+"../sdfat/sdfat.c"
 INCLUDE_DIRS
 "../system"
 "../uart"
@@ -15,5 +17,7 @@ INCLUDE_DIRS
 "../http"
 "../sys_config_storage"
 "../spiflash"
+"../disp_drv"
+"../sdfat"
  ".")
 #  spiffs_create_partition_image(storage ../testWeb FLASH_IN_PROJECT)

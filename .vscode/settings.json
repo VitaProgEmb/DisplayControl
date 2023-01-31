@@ -19,7 +19,10 @@
     "configs.h": "c",
     "esp_err.h": "c",
     "stat.h": "c",
-    "wifi_ap_sta.h": "c"
+    "wifi_ap_sta.h": "c",
+    "esp_heap_caps.h": "c",
+    "multi_heap.h": "c",
+    "unistd.h": "c"
   },
   "C_Cpp.errorSquiggles": "disabled"
 }

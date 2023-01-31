@@ -13,7 +13,7 @@
 #include "soc/i2s_struct.h"
 #include "soc/i2s_reg.h"
 // #include "driver/periph_ctrl.h"
-#include "esp_private/periph_ctrl.h"
+#include "driver/periph_ctrl.h"
 #include "soc/io_mux_reg.h"
 #include "rom/lldesc.h"
 

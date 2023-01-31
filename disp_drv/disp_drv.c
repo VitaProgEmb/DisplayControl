@@ -185,27 +185,7 @@ void disp_drv_init(const drv_conf_t *conf) {
 
     // dma2->qe.stqe_next = dma;
 
-    test_patern = (int16_t*)dma->buf;
-    test_patern[0] =  0b0000000010000001;
-    test_patern[1] =  0b0000000001000010;
-    test_patern[2] =  0b0000000000100100;
-    test_patern[3] =  0b0000000000011000;
-
-    test_patern[4] =  0b0000000000011000;
-    test_patern[5] =  0b0000000000100100;
-    test_patern[6] =  0b0000000001000010;
-    test_patern[7] =  0b0000000010000001;
-
-    test_patern[8] =  0b0000000000000000;
-    test_patern[9] =  0b0000000000000001;
-    test_patern[10] = 0b0000000000000001;
-    test_patern[11] = 0b0000000000000000;
-
-    test_patern[12] = 0b0000000000000000;
-    test_patern[13] = 0b0000000000000000;
-    test_patern[14] = 0b0000000011111111;
-    test_patern[15] = 0b0000000000000000;
-  
+    
     
     //++++++++++++TEST+++++++++++++++++++++++++++++++++++++++++
 

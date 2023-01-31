@@ -11,6 +11,7 @@
 #include "../spiflash/spiflash.h"
 #include "../wifi/wifi_ap_sta.h"
 #include "../http/http.h"
+#include "../sdfat/sdfat.h"
 
 static const char *TAG = "system";
 xTimerHandle tmr;
@@ -38,11 +39,14 @@ static void sys_task(void *arg)
   sys_storage_init();
   spiflash_init();
   WiFIInit();
+  sdcard_init();
   ESP_LOGE(TAG,"-----> system task :%d",cpu_hal_get_core_id());
   httpd_handle_t server =  start_webserver();
+  //главный системный цикл
   while (1)
   {
-    EventBits_t bit = xEventGroupWaitBits(EventGroup,RECONECT,pdTRUE,pdFALSE,0);
+    ESP_LOGW(TAG,"Heap free :%d",heap_caps_get_free_size(MALLOC_CAP_8BIT));
+    EventBits_t bit = xEventGroupWaitBits(EventGroup,RECONECT,pdTRUE,pdFALSE,portMAX_DELAY);
                                               
     if((bit & RECONECT) != 0)
       reconect_wifi();
